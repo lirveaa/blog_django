@@ -1,0 +1,39 @@
+
+    <ul class="page-numbers">
+{#         {% if page.has_previous %}#}
+{#            <li>#}
+{#                      <a href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a>#}
+{#            </li>#}
+{#            {% endif %}#}
+{##}
+{#            <li class="active">#}
+{#                      <a href="?page={{ page.number }}">{{ page.number }}</a>#}
+{#            </li>#}
+{#            {% if page.has_next %}#}
+{#            <li>#}
+{#                <a href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a>#}
+{#            </li>#}
+ {% if page.has_previous %}
+      <a href="?page={{ page.previous_page_number }}">Previous</a>
+{% endif %}
+        {% for n in page.paginator.page_range %}
+
+            {% if page.number == n %}
+                        <li class="active">
+                      <a href="?page={{ n }}">{{ n }}</a>
+            </li>
+
+                {% elif n > page.number|add:-3  and n < page.number|add:3 %}
+            <li>
+            <a  href="?page={{ n }}">{{ n }}</a>
+            </li>
+            {% endif   %}
+
+        {% endfor %}
+
+{% if page.has_next  %}
+                    <a href="?page={{ page.next_page_number }}">Next</a>
+                {% endif %}
+            </ul>
+
+

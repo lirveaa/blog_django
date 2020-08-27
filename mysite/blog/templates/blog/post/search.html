@@ -1,0 +1,15 @@
+
+{% load blog_tags %}
+
+{% block title %}<title>Search</title>{% endblock %}
+
+{% block content %}
+  <div class="search-bar mt-sm-2 mr-2">
+  	<form method="get" action="{% url 'blog:post_list' %}">
+  	<input class="form-control mr-sm-2"  type="search"  placeholder="Search..." name="search">
+        {{ form.as_p }}
+
+      {#  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}</form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load static %}
+{% include "pagination.html" with page=page_obj %}
+{% include "pagination.html" with page=posts %}
+
+{% block title %}
+    <title>My Blog</title>
+{% endblock %}
+
+{% block css %}
+ <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static '/css/fontawesome.css'%}">
+    <link rel="stylesheet" href="{% static '/css/templatemo-stand-blog.css' %}">
+    <link rel="stylesheet" href="{% static '/css/owl.css' %}">
+
+{% endblock %}
+
+{% block content %}
+       <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <section class="blog-posts">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                  {% for post in posts %}
+                <div class="col-lg-12">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="/media/{{ post.header_image }}" alt="">
+                    </div>
+                    <div class="down-content">
+                      <span><a href="{% url 'blog:category' post.category %}">{{ post.category }}</a></span>
+                      <a href="{{ post.get_absolute_url }}"><h4>{{ post.title }}</h4></a>
+                      <ul class="post-info">
+                        {% with post.comments.count as total_comments %}
+                        <li>{{ post.author }}</li>
+                        <li>{{ post.publish }}</li>
+
+                        <li>Comments {{ total_comments }}</li>
+
+                      </ul>
+                        {% endwith %}
+                      {{ post.body|truncatewords_html:10|safe }}
+
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              <li>Tags: {{ post.tags.all|join:", " }},</li>
+                            </ul>
+                          </div>
+                          <div class="col-6">
+                            <ul class="post-share">
+                              <li><i class="fa fa-share-alt"></i></li>
+                              <li><a href="#">Facebook</a>,</li>
+{#                              <li><a href="{% url 'blog:update_post' post.pk %}">Edit </a></li>#}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% include 'blog/includes/sidebar.html' %}
+        </div>
+
+      </div>
+    </section>
+    {% include "pagination.html" with page=posts %}
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load static %}
+{% block title %}<title>{{ post.title }}</title> {% endblock %}
+
+{% block content %}
+       <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+      <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>{{post.category}}</h4>
+                <h2>{{ post.title }}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="/media/{{ post.header_image }}" alt="">
+
+                    </div>
+                    <div class="down-content">
+                      <ul class="post-info">
+                           {% with post.comments.count as total_comments %}
+                         <li>{{ post.author }}</li>
+                        <li>{{ post.publish }}</li>
+                        <li>{{ total_comments }} comment</li>
+                          {% endwith %}
+                      </ul>
+                      {{ post.body|safe }}
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              <li><a href="#">Best Templates</a>,</li>
+                              <li><a href="#">TemplateMo</a></li>
+                            </ul>
+                          </div>
+                          <div class="col-6">
+                            <ul class="post-share">
+                              <li><i class="fa fa-share-alt"></i></li>
+                              <li><a href="#">Facebook</a>,</li>
+                              <li><a href="#"> Twitter</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                   <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                            {% with comments.count as total_comments %}
+                      <h2>Comments: {{ total_comments }}</h2>
+                        {% endwith %}
+                    </div>
+                       {% if not post.comments.all %}
+                  No comments yet...
+                  {% else %}
+
+                      <a href="">Add comment</a>
+
+                    <div class="content">
+                          {% for comment in post.comments.all %}
+                      <ul>
+                        <li>
+
+                          <div class="right-content">
+                            <h4>{{ comment.name }} -
+                                <span> {{ comment.created }}</span></h4>
+                            <p>{{ comment.body }}</p>
+                          </div>
+                        </li>
+                          {% endfor %}
+                  {% endif %}
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Add comment</h2>
+                    </div>
+
+
+                    <div class="form-group">
+
+
+                        <form method="post">
+                            {{ comment_form.as_p }}
+                            {% csrf_token %}
+                            <p><input type="submit" value="Add comment"></p>
+                            </form>
+
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+{% include 'blog/includes/sidebar.html' %}
+
+
+            </div>
+          </div>
+
+
+    </section>
+
+
+
+
+
+{% endblock %}

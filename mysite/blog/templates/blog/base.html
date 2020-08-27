@@ -1,0 +1,115 @@
+{% load blog_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+
+
+    {% block title %}
+    {% endblock %}
+
+ {% block js %}
+
+ <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- Additional Scripts -->
+    <script src="{% static '/js/custom.js'%}"></script>
+    <script src="{% static '/js/owl.js'%}"></script>
+    <script src="{% static '/js/slick.js' %}"></script>
+    <script src="{% static '/js/isotope.js' %}"></script>
+    <script src="{% static '/js/accordions.js' %}"></script>
+
+     <script language = "text/Javascript">
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+    {% endblock js %}
+
+    {% block css %}
+
+    {% endblock %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static '/css/fontawesome.css'%}">
+    <link rel="stylesheet" href="{% static '/css/templatemo-stand-blog.css' %}">
+    <link rel="stylesheet" href="{% static '/css/owl.css' %}">
+
+<header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'blog:post_list' %}"><h2>Hop Top Blog<em>.</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "blog:category" cats="Корея,Корейский язык" %}">Корея,Корейский язык
+
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "blog:category" cats="Дневник читателя"%}">Дневник читателя</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "blog:category" cats="우즈벡어 배우기"%}">우즈벡어 배우기</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">О проекте</a>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+    </header>
+</head>
+<body>
+
+<script type="text/javascript">
+    document.getElementById("id_q").value= "{{ query }}"
+</script>
+    {% block content %}
+
+    {% endblock %}
+
+
+</body>
+<footer>
+     <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="social-icons">
+              <li><a href="https://instagram.com/husen_mansurov">Instagram</a></li>
+              <li><a href="https://www.facebook.com/husen.mansurov.5/">Facebook</a></li>
+
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright 2020 Lirvess Dev Co.
+
+                 | Design: <a href="https://templatemo.com" target="_parent">TemplateMo</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</footer>
+</html>

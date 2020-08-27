@@ -1,0 +1,8 @@
+<ul>
+{% for post in latest_posts %}
+<li>
+    <a href="{{ post.get_absolute_url }}"><h5>{{ post.title }}</h5></a>
+    <span>{{ post.publish }}</span>
+</li>
+{% endfor %}
+</ul>
